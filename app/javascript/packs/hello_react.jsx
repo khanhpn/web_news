@@ -5,16 +5,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import SampleComponent from '../components/SampleComponent'
+import Index from '../components/index';
+import { createStore } from 'redux';
+import myReducer from '../reducers/index';
+import { Provider } from 'react-redux';
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
-
+const store = createStore(
+  myReducer
+);
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <SampleComponent />,
+    <Provider store={store}>
+      <Index />
+    </Provider>,
     document.body.appendChild(document.createElement('div')),
   )
 })
