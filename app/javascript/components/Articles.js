@@ -7,14 +7,11 @@ import HomePageCategory from './TopPage/HomePageCategory';
 class Articles extends Component {
   render() {
     var { articles, categories } = this.props;
-    console.log(categories);
     return (
       <div className="col-sm-9">
         <div className="center_left clearfix">
           { this.showTopArticle(articles) }
-          <HomePageCategory />
-          <HomePageCategory />
-          <HomePageCategory />
+          { this.showHomePageCategory(categories, articles) }
         </div>
       </div>
     )
@@ -23,14 +20,20 @@ class Articles extends Component {
   showTopArticle(articles) {
     var result = null;
     if (articles.length > 0) {
-      result = articles.find((article) => {
-        console.log(article.top);
-        if (article.top === true) {
-          return <TopArticle key={article.id} /> ;
-        }
-      })
+      result = articles.find(article => article.top === true);
+      return <TopArticle article={result} /> ;
     }
     return result;
+  }
+
+  showHomePageCategory(categories, articles) {
+    var results = null;
+    if (categories.length > 0) {
+      results = categories.map((category, index) => {
+        return <HomePageCategory key={index} category={category} articles={articles} />;
+      })
+    }
+    return results;
   }
 }
 
