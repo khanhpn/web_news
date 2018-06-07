@@ -6,15 +6,20 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Main from '../components/Main';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import appReducers from '../reducers/index';
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
 
+const store = createStore(
+  appReducers
+);
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Main />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
+    <Provider store={store}>
+      <Main />
+    </Provider>,
+      document.body.appendChild(document.createElement('div')),
+    )
+  })
