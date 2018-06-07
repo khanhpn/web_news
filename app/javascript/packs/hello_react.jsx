@@ -5,7 +5,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import SampleComponent from '../components/SampleComponent'
+import Main from '../components/Main';
 
 const Hello = props => (
   <div>Hello {props.name}!</div>
@@ -14,7 +14,7 @@ const Hello = props => (
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <SampleComponent />,
+    <Main />,
     document.body.appendChild(document.createElement('div')),
   )
 })
