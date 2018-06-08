@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Image1 from 'images/1.jpg';
 
 export default class TopArticle extends Component {
   render() {

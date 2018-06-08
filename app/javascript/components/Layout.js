@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Weather from './Weather';
-import Articles from './Articles';
+import ArticlesContainer from '../containers/ArticlesContainer';
 
 export default class Layout extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class Layout extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12 center">
-              <Articles />
+              <ArticlesContainer />
               <Weather />
             </div>
           </div>
