@@ -1,3 +1,5 @@
+import * as Types from '../constants/ActionTypes';
+
 var initialState = [
   {
     id: 1,
@@ -42,9 +44,11 @@ var initialState = [
 ];
 
 var articles = (state = initialState, action) => {
-  switch (action) {
+  switch (action.type) {
+    case Types.SHOW_DETAIL_ARTICLE:
+      return [...state];
     default:
-      return state;
+      return [...state];
   }
 }
 

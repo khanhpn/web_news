@@ -6,13 +6,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Main from '../components/Main';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import appReducers from '../reducers/index';
+import thunk from 'redux-thunk';
 
 
 const store = createStore(
-  appReducers
+  appReducers,
+  applyMiddleware(thunk)
 );
 
 document.addEventListener('DOMContentLoaded', () => {

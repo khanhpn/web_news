@@ -3,43 +3,27 @@ import Articles from '../components/Articles';
 import TopArticle from '../components/TopPage/TopArticle';
 import HomePageCategory from '../components/TopPage/HomePageCategory';
 import { connect } from 'react-redux';
-import apiCaller from '../utils/apiCaller';
+import {actCallApiTopArticleFromServer} from '../actions/index';
 
 class ArticlesContainer extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      categories: [],
-      articles: []
-    }
-  }
-
-  componentDidMount() {
-    apiCaller("categories.json", 'GET', null).then(res => {
-      this.setState({
-        categories: res.data
-      })
-    })
-  }
-
   render() {
-    // var { articles, categories } = this.props;
-    var { articles, categories } = this.state;
+    var { articles, categories, propsDispatchDetailArticle } = this.props;
     return (
       <Articles articles={articles} categories={categories}>
-        {this.showTopArticle(articles)}
+        {this.showTopArticle(propsDispatchDetailArticle)}
         {this.showHomePageCategory(categories, articles)}
       </Articles>
     )
   }
 
-  showTopArticle(articles) {
-    var result = null;
-    if (articles.length > 0) {
-      result = articles.find(article => article.top === true);
-      return <TopArticle article={result} /> ;
-    }
-    return result;
+  componentDidMount = () => {
+
+  }
+
+
+  showTopArticle(propsDispatchDetailArticle) {
+    var { top_article } = this.props;
+    return <TopArticle article={top_article} propsDispatchDetailArticle={propsDispatchDetailArticle} />;
   }
 
   showHomePageCategory(categories, articles) {
@@ -56,8 +40,17 @@ class ArticlesContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     articles: state.articles,
-    categories: state.categories
+    categories: state.categories,
+    top_article: state.myTopArticle
   }
 }
 
-export default connect(mapStateToProps, null)(ArticlesContainer);
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    propsDispatchDetailArticle: (article_id) => {
+      dispatch(actCallApiTopArticleFromServer(article_id));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlesContainer);

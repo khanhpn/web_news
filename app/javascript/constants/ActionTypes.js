@@ -1,0 +1,2 @@
+export const SHOW_DETAIL_ARTICLE = "SHOW_DETAIL_ARTICLE";
+export const TOP_ARTICLE = "TOP_ARTICLE";
